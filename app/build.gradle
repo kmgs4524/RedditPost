@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -17,9 +18,20 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField "String", "API_URL", "\"https://www.reddit.com/\""
+        }
+
         release {
+            buildConfigField "String", "API_URL", "\"https://www.reddit.com/\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    kapt {
+        arguments {
+            arg("room.schemaLocation", "$projectDir/schemas".toString())
         }
     }
 }
@@ -33,4 +45,36 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // RecyclerView
+    implementation "androidx.recyclerview:recyclerview:1.0.0"
+
+    // Paging
+    implementation 'androidx.paging:paging-runtime:2.1.2'
+    implementation 'androidx.paging:paging-runtime:2.1.2'
+
+    // Lifecycle
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
+
+    // Room
+    kapt "androidx.room:room-compiler:2.2.5"
+    implementation "androidx.room:room-runtime:2.2.5"
+    implementation "androidx.room:room-rxjava2:2.2.5"
+
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:2.2.10"
+
+    // RxAndroid
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.6.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.6.0"
+
+    // Timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // Android Debug Database
+    debugImplementation "com.amitshekhar.android:debug-db:1.0.6"
 }
