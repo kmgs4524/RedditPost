@@ -18,7 +18,7 @@ interface PostDao {
     @Update
     fun updatePostEntity(postEntity: List<PostEntity>): Maybe<Int>
 
-    // 不足 10 筆的情況下，剩幾筆就回傳幾筆
-    @Query("SELECT * FROM post LIMIT 10 OFFSET :offset")
-    fun getPostEntity(offset: Int): Maybe<List<PostEntity>>
+    // 不足要求筆數的情況下，剩幾筆就回傳幾筆
+    @Query("SELECT * FROM post LIMIT :count OFFSET :offset")
+    fun getPostEntity(count: Int, offset: Int): Maybe<List<PostEntity>>
 }
