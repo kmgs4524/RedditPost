@@ -1,4 +1,4 @@
-package com.york.android.redditpost
+package com.york.android.redditpost.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

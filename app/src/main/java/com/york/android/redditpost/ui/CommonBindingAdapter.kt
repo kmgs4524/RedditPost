@@ -1,4 +1,4 @@
-package com.york.android.redditpost
+package com.york.android.redditpost.ui
 
 import android.widget.ImageView
 import androidx.annotation.DrawableRes

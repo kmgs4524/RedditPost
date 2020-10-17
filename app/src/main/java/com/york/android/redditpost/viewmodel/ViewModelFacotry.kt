@@ -1,4 +1,4 @@
-package com.york.android.redditpost
+package com.york.android.redditpost.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
@@ -29,6 +29,9 @@ class ViewModelFactory(
         val postDao = database.getPostDao()
         val roomPostDataSource = RoomPostDataSource(postDao)
         val postRepository = PostRepository(remotePostDataSource, roomPostDataSource)
-        return PostListViewModel(postRepository, application) as T
+        return PostListViewModel(
+            postRepository,
+            application
+        ) as T
     }
 }
