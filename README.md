@@ -1,5 +1,5 @@
 # RedditPost
-![](https://i.imgur.com/2KsQwLQ.gif)
+![](https://github.com/kmgs4524/RedditPost/blob/master/demo/redditpost_demo.gif)
 ## Android Development and Architecture
 * RxJava
 * Retrofit
