@@ -37,14 +37,7 @@ data class PostEntity(
 
     val thumbnail: String,
 
-    // @Ignore
-    // val thumbnail_height: Any,
-    //
-    // @Ignore
-    // val thumbnail_width: Any,
-
-
-    val title: String,
+    var title: String,
 
     val url: String,
 
@@ -72,7 +65,6 @@ data class Preview(
 )
 
 data class Image(
-    // val id: String,
     val resolutions: List<Resolution>,
     val source: Source
 )
@@ -85,6 +77,4 @@ data class Resolution(
 
 data class Source(
     val url: String?
-    // val height: Int,
-    // val width: Int
 )
