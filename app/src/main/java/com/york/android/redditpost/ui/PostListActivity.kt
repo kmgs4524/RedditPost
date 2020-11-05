@@ -9,12 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.york.android.redditpost.viewmodel.PostListViewModel
 import com.york.android.redditpost.R
-import com.york.android.redditpost.viewmodel.ViewModelFactory
 import com.york.android.redditpost.databinding.ActivityPostListBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class PostListActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: PostListViewModel
+    private val viewModel: PostListViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +33,6 @@ class PostListActivity : AppCompatActivity() {
             addItemDecoration(DividerItemDecoration(this@PostListActivity, RecyclerView.VERTICAL))
             this.adapter = postListAdapter
         }
-
-        viewModel = ViewModelFactory(
-            application
-        ).create(PostListViewModel::class.java)
 
         viewModel.posts.observe(this, Observer {
             postListAdapter.submitList(it)
