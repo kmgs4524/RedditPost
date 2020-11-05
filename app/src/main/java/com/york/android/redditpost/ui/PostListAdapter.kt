@@ -10,9 +10,11 @@ import com.york.android.redditpost.api.PostEntity
 import com.york.android.redditpost.databinding.ItemBottomLeftTitleBackgroundImageBinding
 import com.york.android.redditpost.databinding.ItemLoadingBinding
 import com.york.android.redditpost.databinding.ItemTitleImageApartBinding
+import com.york.android.redditpost.viewmodel.PostListViewModel
 import java.lang.IllegalArgumentException
 
 class PostListAdapter(
+    private val viewModel: PostListViewModel,
     diffCallback: PostDiffUtilCallback
 ) : PagedListAdapter<PostEntity, RecyclerView.ViewHolder>(diffCallback) {
 
@@ -65,10 +67,16 @@ class PostListAdapter(
 
         when (holder) {
             is TitleImageApartViewHolder -> {
-                holder.binding.post = getItem(position)
+                holder.binding.apply {
+                    post = getItem(position)
+                    viewModel = this@PostListAdapter.viewModel
+                }
             }
             is BottomLeftTitleViewHolder -> {
-                holder.binding.post = getItem(position)
+                holder.binding.apply {
+                    post = getItem(position)
+                    viewModel = this@PostListAdapter.viewModel
+                }
             }
         }
     }

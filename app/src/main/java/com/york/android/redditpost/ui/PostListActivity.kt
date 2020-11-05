@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.york.android.redditpost.EventObserver
 import com.york.android.redditpost.viewmodel.PostListViewModel
 import com.york.android.redditpost.R
 import com.york.android.redditpost.databinding.ActivityPostListBinding
@@ -23,7 +24,7 @@ class PostListActivity : AppCompatActivity() {
             this,
             R.layout.activity_post_list
         )
-        val postListAdapter = PostListAdapter(PostDiffUtilCallback())
+        val postListAdapter = PostListAdapter(viewModel, PostDiffUtilCallback())
         binding.posts.apply {
             layoutManager = LinearLayoutManager(
                 this@PostListActivity,
@@ -36,6 +37,10 @@ class PostListActivity : AppCompatActivity() {
 
         viewModel.posts.observe(this, Observer {
             postListAdapter.submitList(it)
+        })
+
+        viewModel.navigateToPostDetail.observe(this, EventObserver {
+            startActivity(PostDetailActivity.newIntent(this@PostListActivity, it))
         })
     }
 
