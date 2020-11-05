@@ -7,7 +7,6 @@ import androidx.paging.PagedList
 import com.york.android.redditpost.api.PostEntity
 import com.york.android.redditpost.model.PostRepository
 import com.york.android.redditpost.ui.PostPagingDataSourceFactory
-import com.york.android.redditpost.viewmodel.BaseViewModel
 
 class PostListViewModel(
     postRepository: PostRepository,
