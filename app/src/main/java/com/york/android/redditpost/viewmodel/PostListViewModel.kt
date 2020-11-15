@@ -2,8 +2,10 @@ package com.york.android.redditpost.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.york.android.redditpost.Event
 import com.york.android.redditpost.api.PostEntity
 import com.york.android.redditpost.model.PostRepository
 import com.york.android.redditpost.ui.PostPagingDataSourceFactory
@@ -14,6 +16,10 @@ class PostListViewModel(
 ) : BaseViewModel(application) {
 
     private val postPagingDataSourceFactory = PostPagingDataSourceFactory(postRepository, disposable)
+
+    private val _navigateToPostDetail = MutableLiveData<Event<String>>()
+    val navigateToPostDetail: LiveData<Event<String>>
+        get() = _navigateToPostDetail
 
     lateinit var posts: LiveData<PagedList<PostEntity>>
 
@@ -28,5 +34,9 @@ class PostListViewModel(
             .build()
         val pageComments = LivePagedListBuilder(postPagingDataSourceFactory, config)
         posts = pageComments.build()
+    }
+
+    fun onClickPost(postEntity: PostEntity) {
+        _navigateToPostDetail.value = Event(postEntity.url)
     }
 }
